@@ -18,7 +18,6 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import javax.swing.JOptionPane;
-import java.awt.Dimension;
 
 /**
  * @author Oliver Türpe
