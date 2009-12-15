@@ -534,6 +534,6 @@ public class tieralter extends JFrame {
 			jContentPane.add(getRasse(), null);
 		}
 		return jContentPane;
-	}
+	} //testkommentar2
 
 }  //  @jve:decl-index=0:visual-constraint="14,-4"
