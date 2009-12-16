@@ -20,9 +20,15 @@ import java.io.IOException;
 import javax.swing.JOptionPane;
 
 /**
+ * Das Tieralter Programm zur Berechnung des Alter Ihres Haustiers.
+ * Copyright (C) [2009]  [Oliver Türpe]
  * @author Oliver Türpe
- * Dieses Programm rechnet das Alter ihres Tiers aus, wenn es ein Mensch wäre.
- *
+ * 
+ * This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 3 of the License, or (at your option) any later version.
+ * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+ * You should have received a copy of the GNU General Public License along with this program; if not, see <http://www.gnu.org/licenses/>.
+ * 
+ * Elektronisch bin ich unter oliver@tuerpe.info zu erreichen.
  */
 
 public class tieralter extends JFrame {
@@ -53,24 +59,47 @@ public class tieralter extends JFrame {
 	 * Hier wird ermittelt wie der Faktor zwischen Mensch und Tier ist.
 	 * @return Faktor zur Weiterberechnung des Alters
 	 */
-	private double auswerten(int ausgesucht, Object Objekt){
-		System.out.println("data" + File.separator + "rassen" + File.separator + Objekt.toString() + "_alter.dat");
-		File alterdatei = new File("data" + File.separator + "rassen" + File.separator + Objekt.toString() + "_alter.dat"); //relative Pfadangabe zur Datenbank der Tiere
+	private double auswerten(Object Objekt){
+		System.out.println("data" + File.separator + "rassen" + File.separator + Objekt.toString() + "_rassen.dat");
+		File alterdatei = new File("data" + File.separator + "rassen" + File.separator + Objekt.toString() + "_rassen.dat"); //relative Pfadangabe zur Datenbank der Tiere
 		String zeile = " "; //zeile initialisieren
+		String wert = "";
+		int zaehler = 0;
 		try{
 			FileReader fr = new FileReader(alterdatei);
 			BufferedReader einlesen = new BufferedReader(fr);
-			for(int i = 0; i < ausgesucht; i++){
-				zeile = einlesen.readLine();
+			while (zeile != null){
+				try {
+					zeile = einlesen.readLine();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				try{
+					System.out.println(Objekt.toString());
+					if (zeile.startsWith(Rasse.getSelectedItem().toString())){
+						for (int i = 0; i< zeile.length();i++){
+							if (zeile.charAt(i) == ','){
+								break;
+							}
+							else{
+								zaehler++;
+							}
+						}
+						for (int i = zaehler +2; i < zeile.length(); i++){
+							wert = wert + zeile.charAt(i); 
+						}	
+					}
+				}catch(NullPointerException e2){
+					//nix machen
+				}
+				System.out.println(wert);
 			}
 		}catch (FileNotFoundException e){
-			System.out.println("data" + File.separator + "rassen" + File.separator + Objekt.toString() + "_alter.dat nicht gefunden");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("tiere.dat nicht gefunden!");
 		}
-		System.out.println("Das Durchschnittsalter ist: " + zeile);
-		double faktor = ALTERDESMENSCHEN / Integer.parseInt(zeile);
+		System.out.println("Das Durchschnittsalter ist: " + wert);
+		double faktor = ALTERDESMENSCHEN / Double.parseDouble(wert);
 		return faktor;
 	}
 	
@@ -215,7 +244,7 @@ public class tieralter extends JFrame {
 						else{
 							if (korrektesDatum()){ //ist ein Datum ausgewählt
 								System.out.println("Datum korreckt");
-								faktor = auswerten(Rasse.getSelectedIndex(), Tier.getSelectedItem()); //Faktor zur Berechnung festlegen
+								faktor = auswerten(Tier.getSelectedItem()); //Faktor zur Berechnung festlegen
 								System.out.println(faktor);
 								System.out.println("Berechnung starten...");
 								for(int i = 5; i <= 100; i = i+5){
@@ -258,9 +287,28 @@ public class tieralter extends JFrame {
 				FileReader fr = new FileReader(tierdatei);
 				BufferedReader einlesen = new BufferedReader(fr);
 				String zeile = " ";
+				String tier = "";
 				while (zeile != null){
-					zeile = einlesen.readLine();
-					Tier.addItem(makeObj(zeile));
+					try {
+						zeile = einlesen.readLine();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					try{
+						for (int i = 0; i < zeile.length();i++){
+							if (zeile.charAt(i) == ','){
+								break;
+							}
+							else{
+								tier = tier + zeile.charAt(i);
+							}
+						}
+					}catch(NullPointerException e2){
+						//nix machen
+					}
+					Tier.addItem(makeObj(tier));
+					tier = "";
 				}
 			}catch (FileNotFoundException e){
 				System.out.println("tiere.dat nicht gefunden!");
@@ -302,14 +350,36 @@ public class tieralter extends JFrame {
 			FileReader fr = new FileReader(rassedatei);
 			BufferedReader einlesen = new BufferedReader(fr);
 			String zeile = " ";
+			String tier = "";
 			while (zeile != null){
-				try {
+				/**try {
 					zeile = einlesen.readLine();
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				Rasse.addItem(makeObj(zeile));
+				**/
+				try {
+					zeile = einlesen.readLine();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				try{
+					for (int i = 0; i < zeile.length();i++){
+						if (zeile.charAt(i) == ','){
+							break;
+						}
+						else{
+							tier = tier + zeile.charAt(i);
+						}
+					}
+				}catch(NullPointerException e2){
+					//nix machen
+				}
+				Rasse.addItem(makeObj(tier));
+				tier = "";
 			}
 		}catch (FileNotFoundException e){
 			System.out.println(Objekt + ".dat nicht gefunden!");
@@ -416,6 +486,13 @@ public class tieralter extends JFrame {
 		if (infos == null) {
 			infos = new JMenu();
 			infos.setText("Info");
+			infos.addMouseListener(new java.awt.event.MouseAdapter() {
+				public void mouseClicked(java.awt.event.MouseEvent e) {
+					System.out.println("mouseClicked()"); // TODO Auto-generated Event stub mouseClicked()
+					System.out.println("about aufgerufen"); // TODO Auto-generated Event stub actionPerformed()
+					JOptionPane.showMessageDialog(jContentPane, "message", "About/Info", 1);
+				}
+			});
 			infos.setText("Info");
 		}
 		return infos;
