@@ -20,7 +20,7 @@ import java.io.IOException;
 import javax.swing.JOptionPane;
 
 /**
- * Das Tieralter Programm zur Berechnung des Alter Ihres Haustiers.
+ * Das Tieralter Programm zur Berechnung des Alters Ihres Haustiers.
  * Copyright (C) [2009]  [Oliver Türpe]
  * @author Oliver Türpe
  * 
@@ -488,9 +488,27 @@ public class tieralter extends JFrame {
 			infos.setText("Info");
 			infos.addMouseListener(new java.awt.event.MouseAdapter() {
 				public void mouseClicked(java.awt.event.MouseEvent e) {
-					System.out.println("mouseClicked()"); // TODO Auto-generated Event stub mouseClicked()
 					System.out.println("about aufgerufen"); // TODO Auto-generated Event stub actionPerformed()
-					JOptionPane.showMessageDialog(jContentPane, "message", "About/Info", 1);
+					String about = "";
+					try{
+						File aboutdatei = new File("about");
+						FileReader fr = new FileReader(aboutdatei);
+						BufferedReader einlesen = new BufferedReader(fr);
+						String zeile = " ";
+						while (zeile != null){
+							try {
+								zeile = einlesen.readLine();
+							} catch (IOException e2) {
+								// TODO Auto-generated catch block
+								e2.printStackTrace();
+							}
+							about = about + zeile + "\n";
+						}
+					}catch (FileNotFoundException e3){
+						System.out.println("about nicht gefunden!");
+					}
+					about = about.substring(0, about.length()-6);
+					JOptionPane.showMessageDialog(jContentPane, about, "About/Info", 1);
 				}
 			});
 			infos.setText("Info");
@@ -558,7 +576,7 @@ public class tieralter extends JFrame {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setJMenuBar(getJJMenuBar());
 		this.setContentPane(getJContentPane());
-		this.setTitle("Tieralter 0.2");
+		this.setTitle("Tieralter");
 	}
 
 	/**
