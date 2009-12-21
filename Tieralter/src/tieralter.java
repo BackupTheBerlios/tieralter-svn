@@ -22,20 +22,21 @@ import javax.swing.JOptionPane;
 /**
  * Das Tieralter Programm zur Berechnung des Alters Ihres Haustiers.
  * Copyright (C) [2009]  [Oliver Türpe]
- * @author Oliver Türpe
- * 
+ * <br>
  * This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 3 of the License, or (at your option) any later version.
  * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
  * You should have received a copy of the GNU General Public License along with this program; if not, see <http://www.gnu.org/licenses/>.
- * 
- * Elektronisch bin ich unter oliver@tuerpe.info zu erreichen.
+ * <br>
+ * Elektronisch bin ich unter oliver&#064;tuerpe.info zu erreichen.
+ * @version 0.4
+ * @author Oliver Türpe
  */
 
 public class tieralter extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel jContentPane = null;
-	private JLabel Erklärung = null;
+	private JLabel Erklaerung = null;
 	private JButton Los = null;
 	private JComboBox Tier = null;
 	private JComboBox Monat = null;
@@ -352,14 +353,6 @@ public class tieralter extends JFrame {
 			String zeile = " ";
 			String tier = "";
 			while (zeile != null){
-				/**try {
-					zeile = einlesen.readLine();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				Rasse.addItem(makeObj(zeile));
-				**/
 				try {
 					zeile = einlesen.readLine();
 				} catch (IOException e) {
@@ -571,8 +564,6 @@ public class tieralter extends JFrame {
 
 	/**
 	 * This method initializes this
-	 * 
-	 * @return void
 	 */
 	private void initialize() {
 		this.setSize(751, 227);
@@ -605,13 +596,13 @@ public class tieralter extends JFrame {
 			LTag = new JLabel();
 			LTag.setBounds(new Rectangle(32, 43, 33, 20));
 			LTag.setText("Tag:");
-			Erklärung = new JLabel();
-			Erklärung.setBounds(new Rectangle(141, 2, 518, 30));
-			Erklärung.setForeground(Color.red);
-			Erklärung.setText("Dieses Programm rechnet das Alter ihres Tieres im Vergleich zum Menschen aus.");
+			Erklaerung = new JLabel();
+			Erklaerung.setBounds(new Rectangle(141, 2, 518, 30));
+			Erklaerung.setForeground(Color.red);
+			Erklaerung.setText("Dieses Programm rechnet das Alter ihres Tieres im Vergleich zum Menschen aus.");
 			jContentPane = new JPanel();
 			jContentPane.setLayout(null);
-			jContentPane.add(Erklärung, null);
+			jContentPane.add(Erklaerung, null);
 			jContentPane.add(getLos(), null);
 			try {
 				jContentPane.add(getTier(), null);
