@@ -457,6 +457,7 @@ public class tieralter extends JFrame {
 	private JMenuBar getJJMenuBar() {
 		if (jJMenuBar == null) {
 			jJMenuBar = new JMenuBar();
+			jJMenuBar.setBackground(Color.lightGray);
 			jJMenuBar.add(getConfig());
 			jJMenuBar.add(getInfos());
 		}
@@ -472,6 +473,7 @@ public class tieralter extends JFrame {
 		if (config == null) {
 			config = new JMenu();
 			config.setText("Konfiguration");
+			config.setBackground(Color.lightGray);
 			config.setText("Konfiguration");
 		}
 		return config;
@@ -486,12 +488,13 @@ public class tieralter extends JFrame {
 		if (infos == null) {
 			infos = new JMenu();
 			infos.setText("Info");
+			infos.setBackground(Color.lightGray);
 			infos.addMouseListener(new java.awt.event.MouseAdapter() {
 				public void mouseClicked(java.awt.event.MouseEvent e) {
 					System.out.println("about aufgerufen"); // TODO Auto-generated Event stub actionPerformed()
 					String about = "";
 					try{
-						File aboutdatei = new File("about");
+						File aboutdatei = new File("data" + File.separator + "about");
 						FileReader fr = new FileReader(aboutdatei);
 						BufferedReader einlesen = new BufferedReader(fr);
 						String zeile = " ";
@@ -505,7 +508,7 @@ public class tieralter extends JFrame {
 							about = about + zeile + "\n";
 						}
 					}catch (FileNotFoundException e3){
-						System.out.println("about nicht gefunden!");
+						System.out.println("data/about nicht gefunden!");
 					}
 					about = about.substring(0, about.length()-6);
 					JOptionPane.showMessageDialog(jContentPane, about, "About/Info", 1);
