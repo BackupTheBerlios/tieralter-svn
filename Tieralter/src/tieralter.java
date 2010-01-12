@@ -18,10 +18,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import javax.swing.JOptionPane;
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.Point;
-import javax.swing.JList;
+
 
 /**
  * Das Tieralter Programm zur Berechnung des Alters Ihres Haustiers.
