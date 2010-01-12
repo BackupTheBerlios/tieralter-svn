@@ -18,6 +18,10 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import javax.swing.JOptionPane;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.Point;
+import javax.swing.JList;
 
 /**
  * Das Tieralter Programm zur Berechnung des Alters Ihres Haustiers.
@@ -47,7 +51,6 @@ public class tieralter extends JFrame {
 	private JLabel LJahr = null;
 	private JLabel LTier = null;
 	private JMenuBar jJMenuBar = null;
-	private JMenu config = null;
 	private JMenu infos = null;
 	private JProgressBar fortschritt = null;
 	private JLabel LRasse = null;
@@ -318,11 +321,16 @@ public class tieralter extends JFrame {
 			Tier.setBounds(new Rectangle(503, 34, 202, 40));
 			Tier.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
+					if(Tier.getSelectedIndex() != 0){
 						Rasse.setEnabled(true);
 						LRasse.setEnabled(true);
 						System.out.println("Rasse Dialog aktivert");
 						rasseleeren();
 						rassefuellen(Tier.getSelectedItem());
+					}
+					else{
+						System.out.println("--- ausgewählt");
+					}
 				}
 			});
 		}
@@ -378,7 +386,7 @@ public class tieralter extends JFrame {
 			System.out.println(Objekt + ".dat nicht gefunden!");
 		}
 		Rasse.removeItemAt(Rasse.getItemCount()-1);
-	}
+	}	
 	
 	/**
 	 * This method initializes Monat	
@@ -451,25 +459,9 @@ public class tieralter extends JFrame {
 		if (jJMenuBar == null) {
 			jJMenuBar = new JMenuBar();
 			jJMenuBar.setBackground(Color.lightGray);
-			jJMenuBar.add(getConfig());
 			jJMenuBar.add(getInfos());
 		}
 		return jJMenuBar;
-	}
-
-	/**
-	 * This method initializes config	
-	 * 	
-	 * @return javax.swing.JMenu	
-	 */
-	private JMenu getConfig() {
-		if (config == null) {
-			config = new JMenu();
-			config.setText("Konfiguration");
-			config.setBackground(Color.lightGray);
-			config.setText("Konfiguration");
-		}
-		return config;
 	}
 
 	/**
@@ -538,7 +530,6 @@ public class tieralter extends JFrame {
 		}
 		return Rasse;
 	}
-
 
 	/**
 	 * @param args
