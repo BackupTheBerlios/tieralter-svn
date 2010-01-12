@@ -1,5 +1,9 @@
 Tieralter
 
+0.6:
+- der Konfigurator ist raus
+- Startdateien für Windows/Unix erstellt
+
 0.4:
 - stabile Implementierung der Datenverwaltung
 - GUI verbessert

@@ -29,7 +29,7 @@ import javax.swing.JOptionPane;
  * You should have received a copy of the GNU General Public License along with this program; if not, see <http://www.gnu.org/licenses/>.
  * <br>
  * Elektronisch bin ich unter oliver&#064;tuerpe.info zu erreichen.
- * @version 0.4
+ * @version 0.6
  * @author Oliver Türpe
  */
 
