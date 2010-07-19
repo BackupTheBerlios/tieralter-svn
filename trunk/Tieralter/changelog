@@ -1,0 +1,25 @@
+Tieralter
+
+0.6:
+- der Konfigurator ist raus
+- Startdateien für Windows/Unix erstellt
+
+0.4:
+- stabile Implementierung der Datenverwaltung
+- GUI verbessert
+- Datenbank geändert, so dass nur die Hälfte des Platzes benötigt wird
+- neue Tierarten eingepflegt
+
+0.3:
+- durch Datenbanken bessere Erweiterbarkeit ermöglicht
+- unter GPL freigegeben
+- weitere Verbesserungen an der GUI
+
+0.2:
+- Algorithmus entwickelt
+- Berechnung implementiert
+- modularer Aufbau des Programms
+- verbesserte GUI
+
+0.1:
+- GUI erstellt
